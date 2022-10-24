@@ -1,5 +1,7 @@
 # Homework 1
 
+![](https://github.com/DjuffinHally/DC_network/tree/main/hw1#:~:text=8%20minutes%20ago-,netscheme.png,-commit)
+
 ## spine_1
 ```
 hostname spine_1
