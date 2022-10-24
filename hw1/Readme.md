@@ -1,6 +1,6 @@
 # Homework 1
 
-![](https://github.com/DjuffinHally/DC_network/tree/main/hw1#:~:text=8%20minutes%20ago-,netscheme.png,-commit)
+![](https://github.com/DjuffinHally/DC_network/blob/main/hw1/netscheme.png)
 
 ## spine_1
 ```
