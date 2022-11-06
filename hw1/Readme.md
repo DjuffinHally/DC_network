@@ -26,10 +26,11 @@ Dn для DC1 = 0 – 7, где
 ```
 
 ### Примеры
-10.0.1.1/32 - loopback1-spine1
-10.1.3.2/32 - loopback2-leaf3
-10.2.2.4/31 - p2p_spine2-leaf3
-10.4.0.0/14 - services
+
+* 10.0.1.1/32 - loopback1-spine1
+* 10.1.3.2/32 - loopback2-leaf3
+* 10.2.2.4/31 - p2p_spine2-leaf3
+* 10.4.0.0/14 - services
 
 ```
               sp-1                sp-2

@@ -1,36 +1,8 @@
-# Homework 1
+# Homework 2
 
 ![](https://github.com/DjuffinHally/DC_network/blob/main/hw2/netscheme.png)
 
-## Адресный план
-
-`IP = 10.Dn.Sn.X/31`, где:
-Dn – номер ЦОДа,
-Sn – номер spine / leaf,
-X – значение по порядку,
-
-Dn для DC1 = 0 – 7, где
-0 – loopback spine
-1 – loopback leaf
-2 – p2p links
-3 – reserved
-4-7 – services
-
-Для loopback
-```
-10.[0-1].[1-255].[0-255]
-  |   |   |- номер loopback
-  |   |- номер spine или leaf коммутатора
-  |-> 0 - spine
-  |-> 1 - leaf
-```
-
-### Примеры
-10.0.1.1/32 - loopback1-spine1
-10.1.3.2/32 - loopback2-leaf3
-10.2.2.4/31 - p2p_spine2-leaf3
-10.4.0.0/14 - services
-
+## Адресация
 ```
               sp-1                sp-2
 lo0         10.0.1.0/32       10.0.2.0/32
