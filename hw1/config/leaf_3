@@ -14,6 +14,16 @@ interface Ethernet1/2
   ip address 10.2.2.5/31
   no shutdown
 
+interface Ethernet1/6
+  no switchport
+  ip address 10.4.2.1/31
+  no shutdown
+
+interface Ethernet1/7
+  no switchport
+  ip address 10.4.3.1/31
+  no shutdown
+
 interface loopback0
   description ID
   ip address 10.1.3.0/32

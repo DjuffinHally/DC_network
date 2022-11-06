@@ -31,8 +31,8 @@ Dn для DC1 = 0 – 7, где
 10.2.2.4/31 - p2p_spine2-leaf3
 10.4.0.0/14 - services
 
-
-```              sp-1                sp-2
+```
+              sp-1                sp-2
 lo0         10.0.1.0/32       10.0.2.0/32
 lo1         10.0.1.1/32       10.0.2.1/32
 eth1/1      10.2.1.0/31       10.2.2.0/31
@@ -44,6 +44,8 @@ lo0     10.1.1.0/32     10.1.2.0/32     10.1.3.0/32
 lo1     10.1.1.1/32     10.1.2.1/32     10.1.3.1/32
 eth1/1  10.2.1.1/31     10.2.1.3/31     10.2.1.5/31
 eth1/2  10.2.2.1/31     10.2.2.3/31     10.2.2.5/31
+eth1/6  10.4.0.1/24     10.4.1.1/24     10.4.2.1/24
+eth1/4                                  10.4.3.1/24
 ```
 
 ## spine_1
@@ -91,56 +93,103 @@ interface loopback0
   ip address 10.0.2.0/32
 ```
 
-###leaf_1
+### leaf_1
 ```
 hostname leaf_1
 boot nxos bootflash:nxos.9.3.3.bin
 interface Ethernet1/1
+  description to_spine_1
+  ip ospf network point-to-point
   no switchport
   ip address 10.2.1.1/31
   no shutdown
 
 interface Ethernet1/2
+  description to_spine_2
+  ip ospf network point-to-point
   no switchport
   ip address 10.2.2.1/31
   no shutdown
 
+interface Ethernet1/6
+  no switchport
+  ip address 10.4.0.1/31
+  no shutdown
+
 interface loopback0
+  description ID
   ip address 10.1.1.0/32
+
+interface loopback1
+  description VTEP
+  ip address 10.1.1.1/32
 ```
 
-###leaf_2
+### leaf_2
 ```
 hostname leaf_2
 boot nxos bootflash:nxos.9.3.3.bin
 interface Ethernet1/1
+  description to_spine_1
+  ip ospf network point-to-point
   no switchport
   ip address 10.2.1.3/31
   no shutdown
 
 interface Ethernet1/2
+  description to_spine_2
+  ip ospf network point-to-point
   no switchport
   ip address 10.2.2.3/31
   no shutdown
 
+interface Ethernet1/6
+  no switchport
+  ip address 10.4.1.1/31
+  no shutdown
+
 interface loopback0
+  description ID
   ip address 10.1.2.0/32
+
+interface loopback1
+  description VTEP
+  ip address 10.1.2.1/32
 ```
 
-###leaf_3
+### leaf_3
 ```
 hostname leaf_3
 boot nxos bootflash:nxos.9.3.3.bin
 interface Ethernet1/1
+  description to_spine_1
+  ip ospf network point-to-point
   no switchport
   ip address 10.2.1.5/31
   no shutdown
 
 interface Ethernet1/2
+  description to_spine_2
+  ip ospf network point-to-point
   no switchport
   ip address 10.2.2.5/31
   no shutdown
 
+interface Ethernet1/6
+  no switchport
+  ip address 10.4.2.1/31
+  no shutdown
+
+interface Ethernet1/7
+  no switchport
+  ip address 10.4.3.1/31
+  no shutdown
+
 interface loopback0
+  description ID
   ip address 10.1.3.0/32
+
+interface loopback1
+  description VTEP
+  ip address 10.1.3.1/32
 ```

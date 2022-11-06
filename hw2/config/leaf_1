@@ -24,6 +24,11 @@ interface Ethernet1/2
   ip router ospf UNDERLAY area 0.0.0.0
   no shutdown
 
+interface Ethernet1/6
+  no switchport
+  ip address 10.4.0.1/31
+  no shutdown
+
 interface loopback0
   description ID
   ip address 10.1.1.0/32
