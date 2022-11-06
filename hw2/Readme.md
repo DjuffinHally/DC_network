@@ -224,3 +224,39 @@ interface loopback0
   description ID
   ip address 10.0.2.0/32
 ```
+
+## Проверка работоспособности
+
+```
+spine_1# sh ip ospf database
+        OSPF Router with ID (10.0.1.0) (Process ID UNDERLAY VRF default)
+
+                Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age        Seq#       Checksum Link Count
+10.0.1.0        10.0.1.0        1283       0x80000014 0xb5ba   6
+10.0.2.0        10.0.2.0        1279       0x80000011 0xa0ca   6
+10.1.1.0        10.1.1.0        1278       0x8000000d 0x27cf   5
+10.1.2.0        10.1.2.0        1129       0x800000a5 0x0251   5
+10.1.3.0        10.1.3.0        1397       0x8000000a 0xbd26   5
+
+spine_1# sh ip route ospf
+IP Route Table for VRF "default"
+'*' denotes best ucast next-hop
+'**' denotes best mcast next-hop
+'[x/y]' denotes [preference/metric]
+'%<string>' in via output denotes VRF <string>
+
+10.1.1.1/32, ubest/mbest: 1/0
+    *via 10.2.1.1, Eth1/1, [110/41], 00:21:23, ospf-UNDERLAY, intra
+10.1.2.1/32, ubest/mbest: 1/0
+    *via 10.2.1.3, Eth1/2, [110/41], 00:49:23, ospf-UNDERLAY, intra
+10.1.3.1/32, ubest/mbest: 1/0
+    *via 10.2.1.5, Eth1/3, [110/41], 00:23:21, ospf-UNDERLAY, intra
+10.2.2.0/31, ubest/mbest: 1/0
+    *via 10.2.1.1, Eth1/1, [110/80], 00:21:23, ospf-UNDERLAY, intra
+10.2.2.2/31, ubest/mbest: 1/0
+    *via 10.2.1.3, Eth1/2, [110/80], 00:49:23, ospf-UNDERLAY, intra
+10.2.2.4/31, ubest/mbest: 1/0
+    *via 10.2.1.5, Eth1/3, [110/80], 00:23:21, ospf-UNDERLAY, intra
+```
