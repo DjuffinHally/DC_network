@@ -1,0 +1,32 @@
+hostname spine_1
+boot nxos bootflash:nxos.9.3.3.bin
+
+feature isis
+router isis UNDERLAY
+net 49.0011.0001.0001.0001.00
+is-type level-1-2
+
+interface Ethernet1/1
+  description to_leaf_1
+  ip address 10.2.1.0/31
+  ip router isis UNDERLAY
+  no switchport
+  no shutdown
+
+interface Ethernet1/2
+  description to_leaf_2
+  ip address 10.2.1.2/31
+  ip router isis UNDERLAY
+  no switchport
+  no shutdown
+
+interface Ethernet1/3
+  description to_leaf_3
+  ip address 10.2.1.4/31
+  ip router isis UNDERLAY
+  no switchport
+  no shutdown
+
+interface loopback0
+  description ID
+  ip address 10.0.1.0/32
