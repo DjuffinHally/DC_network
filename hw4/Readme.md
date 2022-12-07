@@ -1,6 +1,6 @@
 # Homework 2
 
-![](https://github.com/DjuffinHally/DC_network/blob/main/hw2/netscheme.png)
+![](https://github.com/DjuffinHally/DC_network/blob/main/hw4/netscheme.png)
 
 ## Адресация
 ```
