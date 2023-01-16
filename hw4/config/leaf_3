@@ -17,7 +17,7 @@ router bgp 65003
     description leaf_template
     timers 3 9
     address-family ipv4 unicast
-      remote-as 65000
+    remote-as 65000
   neighbor 10.2.1.4
     inherit peer SPINE-PEER-TEMPLATE
     description spine_1

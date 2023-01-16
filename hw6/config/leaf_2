@@ -2,29 +2,61 @@ hostname leaf_2
 boot nxos bootflash:nxos.9.3.3.bin
 
 
+nv overlay evpn
 feature bgp
+feature pim
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
 
 route-map REDISTRIBUTE_CONNECTED permit 10
   match interface loopback1
+hardware access-list tcam region racl 512
+hardware access-list tcam region arp-ether 256 double-wide
 
 router bgp 65002
   router-id 10.1.2.0
-  reconnect-interval 12
   bestpath as-path multipath-relax
+  reconnect-interval 12
   address-family ipv4 unicast
     redistribute direct route-map REDISTRIBUTE_CONNECTED
   template peer SPINE-PEER-TEMPLATE
+    remote-as 65000
     description leaf_template
     timers 3 9
     address-family ipv4 unicast
-    remote-as 65000
+    address-family l2vpn evpn
+      send-community
+      send-community extended
   neighbor 10.2.1.2
     inherit peer SPINE-PEER-TEMPLATE
     description spine_1
   neighbor 10.2.2.2
     inherit peer SPINE-PEER-TEMPLATE
     description spine_2
+evpn
+  vni 10020 l2
+    rd 10020:1
+    route-target import 10020:1
+    route-target export 10020:1
 
+fabric forwarding anycast-gateway-mac 0001.0001.0001
+vlan 20
+  name Clinet_2
+  vn-segment 10020
+
+interface Vlan20
+  no shutdown
+  ip address 10.4.2.1/24
+  fabric forwarding mode anycast-gateway
+
+interface nve1
+  no shutdown
+  host-reachability protocol bgp
+  source-interface loopback1
+  member vni 10020
+    suppress-arp
+    ingress-replication protocol bgp
 
 interface Ethernet1/1
   description to_spine_1
@@ -39,9 +71,7 @@ interface Ethernet1/2
   no shutdown
 
 interface Ethernet1/6
-  no switchport
-  ip address 10.4.1.1/31
-  no shutdown
+  switchport access vlan 20
 
 interface loopback0
   description ID

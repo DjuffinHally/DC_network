@@ -1,4 +1,4 @@
-# Homework 2
+# Homework 4
 
 ![](https://github.com/DjuffinHally/DC_network/blob/main/hw4/netscheme.png)
 
